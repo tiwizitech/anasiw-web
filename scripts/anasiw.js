@@ -3,9 +3,9 @@
 // Grouped as they appear on screen: each group is one row of uppercase + one row of lowercase keys.
 const LETTER_GROUPS = [
     [
-        { upper: 'Č', lower: 'č', base: 'c' },
+        { upper: 'Č', lower: 'č', base: 'c', digraph: 'tc' },
         { upper: 'Ḍ', lower: 'ḍ', base: 'd' },
-        { upper: 'Ğ', lower: 'ğ', base: 'g' },
+        { upper: 'Ǧ', lower: 'ǧ', base: 'g' },
         { upper: 'Ḥ', lower: 'ḥ', base: 'h' },
         { upper: 'Ṛ', lower: 'ṛ', base: 'r' },
     ],
@@ -16,6 +16,11 @@ const LETTER_GROUPS = [
         { upper: 'Γ', lower: 'ɣ', base: 'y', digraph: 'gh' },
         { upper: 'Ɛ', lower: 'ɛ', base: 'e' },
     ],
+];
+
+// Plain letters that are only typed through a digraph; they have no key or "=" shortcut.
+const DIGRAPH_LETTERS = [
+    { upper: 'X', lower: 'x', digraph: 'kh' },
 ];
 
 const CASES = ['upper', 'lower'];
@@ -38,18 +43,21 @@ function shortcutsFor(letter, letterCase) {
     return keys;
 }
 
+// Register a digraph in lowercase ("gh"), capitalized ("Gh") and all caps ("GH").
+function addDigraph(letter) {
+    SHORTCUTS[letter.digraph] = letter.lower;
+    SHORTCUTS[capitalize(letter.digraph)] = letter.upper;
+    SHORTCUTS[letter.digraph.toUpperCase()] = letter.upper;
+}
+
 const SHORTCUTS = {};
 for (const letter of LETTER_GROUPS.flat()) {
     for (const letterCase of CASES) {
-        for (const key of shortcutsFor(letter, letterCase)) {
-            SHORTCUTS[key] = letter[letterCase];
-        }
+        SHORTCUTS[(letterCase === 'upper' ? letter.base.toUpperCase() : letter.base) + '='] = letter[letterCase];
     }
-    // Also accept an all-caps digraph ("GH"), which is not listed in the tables.
-    if (letter.digraph) {
-        SHORTCUTS[letter.digraph.toUpperCase()] = letter.upper;
-    }
+    if (letter.digraph) addDigraph(letter);
 }
+DIGRAPH_LETTERS.forEach(addDigraph);
 
 const textarea = document.getElementById('text');
 const toast = document.getElementById('toast');
