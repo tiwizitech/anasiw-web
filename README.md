@@ -7,9 +7,9 @@ Anasiw iga abecku yeldin seg internet n tirra n tutlayt tamaziɣt s usekkil alat
 | -------- | ------- |
 | č / Č | Ičča (He ate) |
 | ḍ / Ḍ | Iḍan (Nights) |
-| ḥ / Ḥ | Ḥewwa (Eve) |
 | ǧ / Ǧ | Ur ǧǧin (Never) |
-| ɣ / Γ | Γef (On) |
+| ḥ / Ḥ | Ḥewwa (Eve) |
+| ɣ / Ɣ | Ɣef (On) |
 | ṛ / Ṛ | Beṛṛa (Out) |
 | ṣ / Ṣ | Ṣinṣeg (Whistle) |
 | ṭ / Ṭ | Tiṭ (Eye) |
